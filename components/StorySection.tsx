@@ -24,10 +24,11 @@ export default function StorySection({ emoji, title, text, speech }: StorySectio
         <h2 className="text-2xl font-semibold text-primary mb-2">{title}</h2>
         <p className="text-gray-700">{text}</p>
       </div>
-      <div className="relative max-w-[120px]">
-        <MascotShary />
-        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white border rounded-xl shadow px-3 py-2 text-sm text-gray-700 w-40">
+      <div className="absolute -top-6 left-1/2 -translate-x-1/2">
+        <div className="relative bg-white border border-gray-300 rounded-xl shadow px-4 py-2 text-sm text-gray-700 w-40">
           {speech}
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-t-8 border-t-gray-300 border-l-8 border-l-transparent border-r-8 border-r-transparent"></div>
+        <div className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-0 h-0 border-t-8 border-t-white border-l-8 border-l-transparent border-r-8 border-r-transparent"></div>
         </div>
       </div>
     </motion.div>
