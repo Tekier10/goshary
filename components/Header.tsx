@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="bg-teal-500 text-white px-4 py-3 shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between px-4">
         {/* Logo vlevo */}
         <div className="flex items-center space-x-4">
           <Link href="/">
