@@ -12,9 +12,8 @@ export default function HomePage() {
       </Head>
 
       <section className="relative flex flex-col items-center text-center px-4 py-12 sm:py-20">
-       // <h1 className="mt-6 text-4xl sm:text-5xl font-bold text-primary">GoShary</h1>
         <p className="mt-4 max-w-xl text-gray-600 text-lg">
-          Tady začíná nová éra sdíleného byznysu. Neplýtvej kapacitami – sdílej je.
+          Tady začíná nová éra sdíleného byznysu. Neplýtvej kapacitami – sdílej je a vydělávej.
         </p>
       </section>
 
