@@ -66,10 +66,6 @@ export default function HomePage() {
             <p className="text-gray-400">Žádné výsledky pro "{search}".</p>
           )}
         </section>
-
-        <footer className="mt-12 text-center text-sm text-gray-400">
-          &copy; {new Date().getFullYear()} GoShary.cz – sdílej, co máš navíc
-        </footer>
       </main>
     </>
   );
