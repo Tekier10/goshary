@@ -6,7 +6,7 @@ export default function Header() { const [open, setOpen] = useState(false);
 
 const toggleMenu = () => setOpen(!open);
 
-return ( <header className="flex items-center justify-between px-6 py-4 border-b bg-white sticky top-0 z-50"> <Link href="/"> <span className="text-xl font-bold text-primary">GoShary</span> </Link>
+return ( <header className="flex items-center justify-between px-6 py-4 border-b bg-teal-500 text-white shadow sticky top-0 z-50"> <Link href="/"> <span className="text-xl font-bold text-primary">GoShary</span> </Link>
 
 <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-700">
     <Link href="/nabidky">Nabídky</Link>
