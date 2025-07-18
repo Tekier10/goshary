@@ -1,43 +1,44 @@
-// components/Header.tsx – hlavní navigace s ikonami viditelnými i v mobilu vlevo od hamburgeru
+// components/Header.tsx
 
 import { useState } from 'react'; import Link from 'next/link'; import { Menu, X, Search, Heart, User } from 'lucide-react';
 
-export default function Header() { const [isOpen, setIsOpen] = useState(false);
+export default function Header() { const [menuOpen, setMenuOpen] = useState(false);
 
-return ( <header className="bg-teal-500 text-white shadow"> <div className="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center"> <div className="flex items-center gap-4"> <Link href="/search" title="Vyhledávání" className="hover:text-gray-200"> <Search size={20} /> </Link> <Link href="/favorites" title="Oblíbené" className="hover:text-gray-200"> <Heart size={20} /> </Link> <Link href="/login" title="Přihlášení" className="hover:text-gray-200"> <User size={20} /> </Link> </div>
+return ( <header className="bg-teal-500 text-white shadow-sm"> <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"> <div className="flex justify-between items-center h-16"> {/* Logo */} <div className="flex-shrink-0"> <Link href="/"> <span className="text-xl font-bold text-white">GoShary</span> </Link> </div>
 
-<Link href="/">
-      <span className="text-white text-xl font-bold">GoShary</span>
-    </Link>
-
-    <div className="flex items-center gap-4">
-      <nav className="hidden md:flex items-center gap-6">
-        <Link href="/nabidky" className="hover:text-gray-200">Nabídky</Link>
-        <Link href="/pridat" className="hover:text-gray-200">Přidat</Link>
-        <Link href="/jak-to-funguje" className="hover:text-gray-200">Jak to funguje</Link>
-        <Link href="/kontakt" className="hover:text-gray-200">Kontakt</Link>
-      </nav>
-
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-white"
-        aria-label="Menu"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+{/* Icons and Hamburger */}
+      <div className="flex items-center space-x-4">
+        <Link href="/search" className="hover:opacity-80 hidden sm:inline" title="Vyhledávání">
+          <Search className="w-5 h-5" />
+        </Link>
+        <Link href="/favorites" className="hover:opacity-80 hidden sm:inline" title="Oblíbené">
+          <Heart className="w-5 h-5" />
+        </Link>
+        <Link href="/login" className="hover:opacity-80 hidden sm:inline" title="Přihlášení">
+          <User className="w-5 h-5" />
+        </Link>
+        <button onClick={() => setMenuOpen(!menuOpen)} className="text-white">
+          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
     </div>
   </div>
 
-  {isOpen && (
-    <div className="md:hidden px-4 pb-4 flex flex-col gap-3 bg-teal-600 text-white">
-      <Link href="/nabidky">Nabídky</Link>
-      <Link href="/pridat">Přidat</Link>
-      <Link href="/jak-to-funguje">Jak to funguje</Link>
-      <Link href="/kontakt">Kontakt</Link>
+  {/* Mobile menu */}
+  {menuOpen && (
+    <div className="sm:hidden px-4 pt-2 pb-4 bg-teal-600 text-white">
+      <nav className="space-y-2">
+        <Link href="/search" className="block">🔍 Vyhledávání</Link>
+        <Link href="/favorites" className="block">❤️ Oblíbené</Link>
+        <Link href="/login" className="block">👤 Přihlášení</Link>
+        <Link href="/" className="block">🏠 Domů</Link>
+        <Link href="/nabidky" className="block">📋 Nabídky</Link>
+        <Link href="/pridat" className="block">➕ Přidat</Link>
+        <Link href="/jak-to-funguje" className="block">❓ Jak to funguje</Link>
+        <Link href="/kontakt" className="block">📬 Kontakt</Link>
+      </nav>
     </div>
   )}
 </header>
 
 ); }
-
-
