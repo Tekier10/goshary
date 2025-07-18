@@ -9,7 +9,7 @@ return ( <header className="bg-teal-500 text-white px-4 py-3 shadow-md"> <div cl
 {/* Logo a název vlevo */}
     <div className="flex items-center space-x-4">
       <Link href="/">
-        <span className="text-xl font-bold text-black">go shary</span>
+        <span className="text-xl font-bold text-black">GO SHARY</span>
       </Link>
     </div>
 
