@@ -37,6 +37,31 @@ export default function DetailItem({ data, typStranky }: Props) {
         </div>
       )}
 
+{data.datumPridani && (
+  <p className="text-sm text-gray-400">
+    Přidáno: {new Date(data.datumPridani).toLocaleDateString('cs-CZ')}
+  </p>
+)}
+
+{data.zobrazeni !== undefined && (
+  <p className="text-sm text-gray-400">
+    Zobrazeno: {data.zobrazeni}×
+  </p>
+)}
+
+{data.stitky && (
+  <div className="flex flex-wrap gap-2 mt-2">
+    {data.stitky.map((tag, i) => (
+      <span
+        key={i}
+        className="text-xs bg-teal-100 text-teal-700 px-2 py-1 rounded-full"
+      >
+        {tag}
+      </span>
+    ))}
+  </div>
+)}
+      
       <p className="text-sm text-gray-500">Lokalita: {data.lokalita}</p>
       <p className="text-base mt-4 whitespace-pre-line">{data.popis}</p>
 
