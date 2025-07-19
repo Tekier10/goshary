@@ -15,9 +15,6 @@ export default function Layout({ children }: LayoutProps) {
       <Header />
       <main className="flex-1 px-6 py-8">
         {children}
-        <div className="mt-12 flex justify-center">
-          <MascotShary />
-        </div>
       </main>
       <Footer />
     </div>
