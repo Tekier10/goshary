@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "typ": "Stroje",
+    "titulek": "Volná CNC fréza",
+    "popis": "Naše dílna nabízí dočasné využití CNC frézy. Vhodné pro menší zakázky.",
+    "lokalita": "Brno",
+    "kontakt": "firma@priklad.cz",
+    "overeno": true,
+    "hodnoceni": 4.3
+  },
+  {
+    "id": "2",
+    "typ": "Doprava",
+    "titulek": "Dodávka na víkend",
+    "popis": "Máme volnou dodávku, kterou nevyužíváme o víkendu. Možnost zapůjčení s řidičem.",
+    "lokalita": "Praha",
+    "kontakt": "doprava@autofirma.cz",
+    "overeno": false,
+    "hodnoceni": 3.7
+  }
+]
