@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1",
+    "typ": "Pronájem manipulační techniky",
+    "titulek": "Hledáme VZV do provozu",
+    "popis": "Hledáme VZV na 3 týdny v okolí Olomouce.",
+    "lokalita": "Olomouc",
+    "kontakt": "logistika@firma.cz",
+    "overeno": true,
+    "hodnoceni": 4.2
+  },
+  {
+    "id": "2",
+    "typ": "Sdílení serverové kapacity",
+    "titulek": "Výpočetní výkon pro AI",
+    "popis": "Potřebujeme dočasně cloudové prostředky pro výpočty v AI projektu.",
+    "lokalita": "Online / remote",
+    "kontakt": "it@inovace.cz",
+    "overeno": false,
+    "hodnoceni": 3.9
+  }
+]
