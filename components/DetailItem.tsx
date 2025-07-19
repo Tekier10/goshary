@@ -13,6 +13,9 @@ type Item = {
   kontakt: string;
   overeno?: boolean;
   hodnoceni?: number;
+  datumPridani?: string;
+  zobrazeni?: number;
+  stitky?: string[];
 };
 
 type Props = {
