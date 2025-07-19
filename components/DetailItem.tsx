@@ -1,7 +1,7 @@
 // components/DetailItem.tsx – sdílená komponenta pro zobrazení detailu nabídky/poptávky
 
 import Link from 'next/link';
-import OvereniBadge from '../components/OvereniBadge.tsx'
+import OvereniBadge from '../components/OvereniBadge'
 type Item = { id: string; typ: string; popis: string; lokalita: string; kontakt: string; };
 
 type Props = { data: Item; typStranky: 'nabidka' | 'poptavka'; };
