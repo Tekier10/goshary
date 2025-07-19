@@ -1,32 +1,7 @@
-// pages/nabidka/[id].tsx
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DetailItem from '../../components/DetailItem';
-
-const mockNabidky = [
-  {
-    id: '1',
-    typ: 'Stroje',
-    titulek: 'Volná CNC fréza',
-    popis: 'Naše dílna nabízí přesnou CNC frézu k pronájmu na týdenní bázi.',
-    lokalita: 'Brno',
-    kontakt: 'firma@priklad.cz',
-    overeno: true,
-    hodnoceni: 4.3,
-    datumPridani: '2025-07-15',
-    zobrazeni: 127,
-    stitky: ['#cnc', '#stroje', '#pronajem'],
-  },
-  {
-    id: '2',
-    typ: 'Software',
-    titulek: 'Sdílený ERP systém',
-    popis: 'Možnost využití našeho ERP systému pro menší firmy.',
-    overeno: false,
-   hodnoceni: 4.7, 
-  },
-  // další nabídky…
-];
+import nabidkyData from '../../data/nabidky.json';
 
 export default function DetailNabidky() {
   const { query } = useRouter();
@@ -34,19 +9,11 @@ export default function DetailNabidky() {
 
   useEffect(() => {
     if (query.id) {
-      const found = mockNabidky.find((item) => item.id === query.id);
+      const found = nabidkyData.find((item) => item.id === query.id);
       setData(found);
     }
   }, [query.id]);
 
   if (!data) return <p className="p-6 text-center">Načítám...</p>;
-
-  return (
-    <div className="p-6 max-w-3xl mx-auto space-y-4">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h1 className="text-2xl font-semibold">{data.titulek}</h1>
-      </div>
-      <DetailItem data={data} typStranky="nabidka" />
-    </div>
-  );
+  return <DetailItem data={data} typStranky="nabidka" />;
 }
