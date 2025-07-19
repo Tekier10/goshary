@@ -10,6 +10,7 @@ const mockNabidky = [
     titulek: 'Volná CNC fréza',
     popis: 'Naše dílna nabízí volnou CNC frézu k využití.',
     overeno: true,
+    hodnoceni: 4.3,
   },
   {
     id: '2',
@@ -17,6 +18,7 @@ const mockNabidky = [
     titulek: 'Sdílený ERP systém',
     popis: 'Možnost využití našeho ERP systému pro menší firmy.',
     overeno: false,
+   hodnoceni: 4.7, 
   },
   // další nabídky…
 ];
