@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import OvereniBadge from './OvereniBadge';
+import Hodnoceni from './Hodnoceni';
 
 type Item = {
   id: string;
@@ -11,6 +12,7 @@ type Item = {
   lokalita: string;
   kontakt: string;
   overeno?: boolean;
+  hodnoceni?: number;
 };
 
 type Props = {
@@ -25,6 +27,12 @@ export default function DetailItem({ data, typStranky }: Props) {
         <h1 className="text-2xl font-bold">{data.typ}</h1>
         {data.overeno !== undefined && <OvereniBadge overeno={data.overeno} />}
       </div>
+
+      {data.hodnoceni !== undefined && (
+        <div className="mt-2">
+          <Hodnoceni hodnoceni={data.hodnoceni} />
+        </div>
+      )}
 
       <p className="text-sm text-gray-500">Lokalita: {data.lokalita}</p>
       <p className="text-base mt-4 whitespace-pre-line">{data.popis}</p>
