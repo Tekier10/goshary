@@ -2,7 +2,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DetailItem from '../../components/DetailItem';
-import OvereniBadge from '../../components/OvereniBadge';
 
 const mockNabidky = [
   {
@@ -39,7 +38,6 @@ export default function DetailNabidky() {
     <div className="p-6 max-w-3xl mx-auto space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <h1 className="text-2xl font-semibold">{data.titulek}</h1>
-        <OvereniBadge overeno={data.overeno} />
       </div>
       <DetailItem data={data} typStranky="nabidka" />
     </div>
