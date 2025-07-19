@@ -18,6 +18,7 @@ export default function Layout({ children }: LayoutProps) {
         {children}
       </main>
       <Footer />
+      <CookieConsent />
     </div>
   );
 }
