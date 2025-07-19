@@ -1,40 +1,43 @@
-import { useState } from 'react'; import Link from 'next/link';
+import Link from 'next/link';
 
-const mockNabidky = [ { id: '1', typ: 'Skladovací prostory', popis: 'Nabízíme volný sklad v Brně, 300 m², suchý, zabezpečený.', lokalita: 'Brno', kontakt: 'firma@example.cz', }, { id: '2', typ: 'Strojní vybavení', popis: 'K dispozici CNC fréza s operátorem. Praha 4.', lokalita: 'Praha', kontakt: 'cnc@firma.cz', }, ];
+const nabidky = [
+  {
+    id: '1',
+    typ: 'Stroje',
+    titulek: 'Volná CNC fréza k dispozici',
+    popis: 'Naše dílna má k dispozici volnou kapacitu 3osé CNC frézy. Rádi nabídneme výrobu menších sérií.',
+  },
+  {
+    id: '2',
+    typ: 'Prostory',
+    titulek: 'Sdílený sklad k pronájmu',
+    popis: 'Nabízíme 50 m² skladu v centru Brna za zvýhodněnou cenu. Vhodné pro menší e-shop.',
+  },
+  {
+    id: '3',
+    typ: 'Know-how',
+    titulek: 'Mentoring v oblasti automatizace',
+    popis: 'Náš specialista nabízí konzultace v oblasti průmyslové automatizace a IoT.',
+  },
+];
 
-export default function NabidkaPage() { const [typFiltr, setTypFiltr] = useState('');
-
-const typy = [...new Set(mockNabidky.map((p) => p.typ))]; const filteredNabidky = typFiltr ? mockNabidky.filter((p) => p.typ === typFiltr) : mockNabidky;
-
-return ( <main className="max-w-4xl mx-auto p-6"> <h1 className="text-2xl font-bold mb-4">Nabídky</h1>
-
-<div className="mb-6">
-    <label className="block mb-2 font-medium">Filtrovat podle typu:</label>
-    <select
-      value={typFiltr}
-      onChange={(e) => setTypFiltr(e.target.value)}
-      className="border border-gray-300 rounded px-3 py-2"
-    >
-      <option value="">Všechny</option>
-      {typy.map((typ) => (
-        <option key={typ} value={typ}>
-          {typ}
-        </option>
-      ))}
-    </select>
-  </div>
-
-  <div className="grid gap-4">
-    {filteredNabidky.map((nabidka) => (
-      <Link key={nabidka.id} href={`/nabidka/${nabidka.id}`}>
-        <div className="border rounded p-4 shadow-sm hover:bg-gray-50 hover:shadow-md transition cursor-pointer">
-          <h2 className="text-lg font-semibold">{nabidka.typ}</h2>
-          <p className="text-sm text-gray-600">{nabidka.lokalita}</p>
-          <p className="mt-2 text-sm text-gray-800">{nabidka.popis.slice(0, 100)}…</p>
-        </div>
-      </Link>
-    ))}
-  </div>
-</main>
-
-); }
+export default function NabidkaPage() {
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-semibold mb-6">Nabídky</h1>
+      <div className="grid gap-4">
+        {nabidky.map((nabidka) => (
+          <Link
+            key={nabidka.id}
+            href={`/nabidka/${nabidka.id}`}
+            className="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow bg-white"
+          >
+            <p className="text-sm text-teal-600 font-medium mb-1">{nabidka.typ}</p>
+            <h2 className="text-xl font-bold mb-2">{nabidka.titulek}</h2>
+            <p className="text-gray-700">{nabidka.popis}</p>
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
