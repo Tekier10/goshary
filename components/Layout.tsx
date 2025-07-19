@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import MascotShary from './MascotShary';
+import CookieConsent from './CookieConsent';
 
 interface LayoutProps {
   children: ReactNode;
