@@ -51,9 +51,9 @@ export default function Header() {
           </Link>
 
           {/* Menu napravo */}
-          <Link href="/nabidky" className="hover:underline">Nabídky</Link>
-          <Link href="/pridat" className="hover:underline">Přidat</Link>
           <Link href="/jak-to-funguje" className="hover:underline">Jak to funguje</Link>
+          <Link href="/poptavka" className="hover:underline">Poptávka</Link>
+          <Link href="/nabidka" className="hover:underline">Nabídka</Link>
           <Link href="/kontakt" className="hover:underline">Kontakt</Link>
         </div>
       </div>
@@ -61,9 +61,9 @@ export default function Header() {
       {/* Rozbalené menu v mobilu */}
       {isOpen && (
         <nav className="sm:hidden px-4 pt-2 pb-4">
-          <Link href="/nabidky" className="block py-1">Nabídky</Link>
-          <Link href="/pridat" className="block py-1">Přidat</Link>
           <Link href="/jak-to-funguje" className="block py-1">Jak to funguje</Link>
+          <Link href="/poptavka" className="block py-1">Poptávka</Link>
+          <Link href="/nabidka" className="block py-1">Nabídka</Link>
           <Link href="/kontakt" className="block py-1">Kontakt</Link>
         </nav>
       )}
