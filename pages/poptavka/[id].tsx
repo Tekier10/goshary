@@ -1,31 +1,7 @@
-// pages/poptavka/[id].tsx – detail poptávky pomocí sdílené komponenty
-
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import DetailItem from '../../components/DetailItem';
-
-const mockPoptavky = [
-  {
-    id: '1',
-    typ: 'Pronájem manipulační techniky',
-    titulek: 'Hledáme VZV do provozu',
-    popis: 'Hledáme VZV na 3 týdny v okolí Olomouce.',
-    lokalita: 'Olomouc',
-    kontakt: 'logistika@firma.cz',
-    overeno: true,
-    hodnoceni: 4.2,
-  },
-  {
-    id: '2',
-    typ: 'Sdílení serverové kapacity',
-    titulek: 'Výpočetní výkon pro AI',
-    popis: 'Potřebujeme dočasně cloudové prostředky pro výpočty v AI projektu.',
-    lokalita: 'Online / remote',
-    kontakt: 'it@inovace.cz',
-    overeno: false,
-    hodnoceni: 3.9,
-  },
-];
+import poptavkyData from '../../data/poptavky.json';
 
 export default function DetailPoptavky() {
   const { query } = useRouter();
@@ -33,7 +9,7 @@ export default function DetailPoptavky() {
 
   useEffect(() => {
     if (query.id) {
-      const found = mockPoptavky.find((item) => item.id === query.id);
+      const found = poptavkyData.find((item) => item.id === query.id);
       setData(found);
     }
   }, [query.id]);
