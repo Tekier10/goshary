@@ -1,95 +1,45 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import FulltextSearch from '../components/FulltextSearch';
-import SortSelect from '../components/SortSelect';
+import nabidkyData from '../data/nabidky.json';
 
-const nabidky = [
-  {
-    id: '1',
-    typ: 'Stroje',
-    titulek: 'Volná CNC fréza k dispozici',
-    popis: 'Naše dílna má k dispozici volnou kapacitu 3osé CNC frézy. Rádi nabídneme výrobu menších sérií.',
-    hodnoceni: 4.3,
-  },
-  {
-    id: '2',
-    typ: 'Prostory',
-    titulek: 'Sdílený sklad k pronájmu',
-    popis: 'Nabízíme 50 m² skladu v centru Brna za zvýhodněnou cenu. Vhodné pro menší e-shop.',
-    hodnoceni: 3.8,
-  },
-  {
-    id: '3',
-    typ: 'Know-how',
-    titulek: 'Mentoring v oblasti automatizace',
-    popis: 'Náš specialista nabízí konzultace v oblasti průmyslové automatizace a IoT.',
-    hodnoceni: 4.9,
-  },
-];
+const mockNabidky = nabidkyData;
 
-export default function NabidkaPage() {
-  const [typFiltr, setTypFiltr] = useState('');
-  const [query, setQuery] = useState('');
-  const [sortBy, setSortBy] = useState('default');
+export default function Nabidka() {
+  const [search, setSearch] = useState('');
 
-  const typy = [...new Set(nabidky.map((n) => n.typ))];
-
-  let filtered = nabidky.filter((n) => {
-    const matchesTyp = typFiltr ? n.typ === typFiltr : true;
-    const matchesQuery =
-      query === '' ||
-      n.typ.toLowerCase().includes(query.toLowerCase()) ||
-      n.titulek.toLowerCase().includes(query.toLowerCase()) ||
-      n.popis.toLowerCase().includes(query.toLowerCase());
-    return matchesTyp && matchesQuery;
-  });
-
-  if (sortBy === 'titulek') {
-    filtered = [...filtered].sort((a, b) => a.titulek.localeCompare(b.titulek));
-  } else if (sortBy === 'hodnoceni') {
-    filtered = [...filtered].sort((a, b) => (b.hodnoceni ?? 0) - (a.hodnoceni ?? 0));
-  }
+  const filtered = mockNabidky.filter(
+    (item) =>
+      item.typ.toLowerCase().includes(search.toLowerCase()) ||
+      item.popis.toLowerCase().includes(search.toLowerCase()) ||
+      item.lokalita.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-semibold mb-6">Nabídky</h1>
+    <main className="max-w-3xl mx-auto p-6 space-y-4">
+      <h1 className="text-2xl font-bold">Nabídky</h1>
 
-      <FulltextSearch
-        onSearch={(q) => setQuery(q)}
-        placeholder="Hledat podle typu, titulku nebo popisu…"
+      <input
+        type="text"
+        placeholder="Vyhledat…"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="w-full p-2 border rounded"
       />
 
-      <div className="mb-6">
-        <label className="block mb-2 font-medium">Filtrovat podle typu:</label>
-        <select
-          value={typFiltr}
-          onChange={(e) => setTypFiltr(e.target.value)}
-          className="border border-gray-300 rounded px-3 py-2"
-        >
-          <option value="">Všechny</option>
-          {typy.map((typ) => (
-            <option key={typ} value={typ}>
-              {typ}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <SortSelect value={sortBy} onChange={setSortBy} />
-
-      <div className="grid gap-4">
-        {filtered.map((nabidka) => (
-          <Link
-            key={nabidka.id}
-            href={`/nabidka/${nabidka.id}`}
-            className="block border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow bg-white"
+      <ul className="space-y-4">
+        {filtered.map((item) => (
+          <li
+            key={item.id}
+            className="border border-gray-200 p-4 rounded hover:bg-gray-50 transition"
           >
-            <p className="text-sm text-teal-600 font-medium mb-1">{nabidka.typ}</p>
-            <h2 className="text-xl font-bold mb-2">{nabidka.titulek}</h2>
-            <p className="text-gray-700">{nabidka.popis}</p>
-          </Link>
+            <Link href={`/nabidka/${item.id}`} className="block">
+              <h2 className="text-lg font-semibold">{item.titulek}</h2>
+              <p className="text-sm text-gray-500">{item.lokalita}</p>
+              <p className="mt-2 text-gray-700">{item.popis.slice(0, 100)}...</p>
+            </Link>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </main>
   );
 }
