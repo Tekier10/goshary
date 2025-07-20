@@ -27,6 +27,12 @@ export default function Poptavka() {
   return (
     <main className="max-w-4xl mx-auto p-6 space-y-6">
       <h1 className="text-2xl font-bold">Poptávky</h1>
+      <Link
+        href="/pridat"
+        className="inline-block mt-2 bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition"
+      >
+        ➕ Přidat poptávku
+      </Link>
 
       <div className="flex flex-col sm:flex-row gap-4">
         <input
