@@ -1,9 +1,23 @@
-// pages/nabidka.tsx 
+// pages/nabidka.tsx
 import { useState, useEffect } from 'react'; import Link from 'next/link'; import Head from 'next/head'; import FavouriteButton from '../components/FavouriteButton'; import nabidkyData from '../data/nabidky.json';
 
-export default function NabidkaPage() { const [search, setSearch] = useState(''); const [nabidky, setNabidky] = useState(nabidkyData);
+export default function NabidkaPage() { const [search, setSearch] = useState(''); const [filterTyp, setFilterTyp] = useState(''); const [seraditPodle, setSeraditPodle] = useState(''); const [nabidky, setNabidky] = useState(nabidkyData);
 
-useEffect(() => { const filtered = nabidkyData.filter((n) => n.titulek.toLowerCase().includes(search.toLowerCase()) || n.popis.toLowerCase().includes(search.toLowerCase()) || n.lokalita.toLowerCase().includes(search.toLowerCase()) ); setNabidky(filtered); }, [search]);
+useEffect(() => { let filtered = nabidkyData.filter((n) => n.titulek.toLowerCase().includes(search.toLowerCase()) || n.popis.toLowerCase().includes(search.toLowerCase()) || n.lokalita.toLowerCase().includes(search.toLowerCase()) );
+
+if (filterTyp) {
+  filtered = filtered.filter((n) => n.typ === filterTyp);
+}
+
+if (seraditPodle === 'lokalita') {
+  filtered.sort((a, b) => a.lokalita.localeCompare(b.lokalita));
+} else if (seraditPodle === 'nazev') {
+  filtered.sort((a, b) => a.titulek.localeCompare(b.titulek));
+}
+
+setNabidky(filtered);
+
+}, [search, filterTyp, seraditPodle]);
 
 return ( <> <Head> <title>Nabídky | GoShary</title> </Head> <main className="max-w-4xl mx-auto p-6"> <div className="flex justify-between items-center mb-4"> <h1 className="text-2xl font-bold">Nabídky</h1> <Link
 href="/pridat?typ=nabidka"
@@ -15,8 +29,33 @@ className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
       placeholder="Hledat..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
-      className="w-full border border-gray-300 rounded px-3 py-2 mb-6"
+      className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
     />
+
+    <div className="flex flex-wrap gap-4 mb-6">
+      <select
+        value={filterTyp}
+        onChange={(e) => setFilterTyp(e.target.value)}
+        className="border border-gray-300 rounded px-3 py-2"
+      >
+        <option value="">Všechny typy</option>
+        <option value="Stroje">Stroje</option>
+        <option value="Prostory">Prostory</option>
+        <option value="Služby">Služby</option>
+        <option value="Materiál">Materiál</option>
+        <option value="Jiné">Jiné</option>
+      </select>
+
+      <select
+        value={seraditPodle}
+        onChange={(e) => setSeraditPodle(e.target.value)}
+        className="border border-gray-300 rounded px-3 py-2"
+      >
+        <option value="">Seřadit podle</option>
+        <option value="nazev">Název</option>
+        <option value="lokalita">Lokalita</option>
+      </select>
+    </div>
 
     <ul className="space-y-4">
       {nabidky.map((n) => (
@@ -38,4 +77,3 @@ className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
 </>
 
 ); }
-
