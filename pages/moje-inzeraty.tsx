@@ -12,9 +12,9 @@ export default function MojeInzeraty() {
 
   useEffect(() => {
     if (!user) return;
-    const mojeInzeraty = [...nabidkyData, ...poptavkyData].filter(
-      (item) => item.autor === user.jmeno || item.email === user.email
-    );
+      const mojeInzeraty = [...nabidkyData, ...poptavkyData].filter(
+        (item) => item.autor === user.name || item.kontakt === user.email
+      );
     setMoje(mojeInzeraty);
   }, [user]);
 
