@@ -8,7 +8,8 @@
     "kontakt": "firma@priklad.cz",
     "overeno": true,
     "hodnoceni": 4.3,
-    "autor": "jan.novak"
+    "autor": "jan.novak",
+    "autorEmail": "jan.novak@email.cz"
   },
   {
     "id": "2",
@@ -19,6 +20,7 @@
     "kontakt": "doprava@autofirma.cz",
     "overeno": false,
     "hodnoceni": 3.7,
-    "autor": "adam.novak"
+    "autor": "adam.novak",
+    "autorEmail": "adam.novak@email.cz"
   }
 ]
