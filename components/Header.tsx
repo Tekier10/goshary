@@ -23,7 +23,7 @@ export default function Header() {
           <Link href="/search" title="Vyhledávání">
             <FaSearch className="w-5 h-5 text-white" />
           </Link>
-          <Link href="/favorites" title="Oblíbené">
+          <Link href="/oblibene" title="Oblíbené">
             <FaHeart className="w-5 h-5 text-white" />
           </Link>
           <Link href="/login" title="Přihlášení">
@@ -43,7 +43,7 @@ export default function Header() {
           <Link href="/search" title="Vyhledávání">
             <FaSearch className="w-5 h-5 text-white" />
           </Link>
-          <Link href="/favorites" title="Oblíbené">
+          <Link href="/oblibene" title="Oblíbené">
             <FaHeart className="w-5 h-5 text-white" />
           </Link>
           <Link href="/login" title="Přihlášení">
