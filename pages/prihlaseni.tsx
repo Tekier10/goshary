@@ -1,16 +1,19 @@
-// pages/prihlaseni.tsx – přihlašovací stránka
-
-import Head from 'next/head';
+// pages/prihlaseni.tsx
+import { useRouter } from 'next/router';
 import { useState } from 'react';
+import useUser from '../utils/useUser';
+import Head from 'next/head';
 
 export default function Prihlaseni() {
+  const router = useRouter();
+  const { login } = useUser();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [heslo, setHeslo] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Přihlašování...', { email, heslo });
-    // TODO: odeslat přihlášení na backend
+    login({ name, email });
+    router.push('/');
   };
 
   return (
@@ -19,34 +22,27 @@ export default function Prihlaseni() {
         <title>Přihlášení | GoShary</title>
       </Head>
       <main className="max-w-md mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6 text-center">Přihlášení</h1>
-
+        <h1 className="text-2xl font-bold mb-4">Přihlášení</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">E-mail</label>
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-1">Heslo</label>
-            <input
-              type="password"
-              required
-              value={heslo}
-              onChange={(e) => setHeslo(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-
+          <input
+            type="text"
+            placeholder="Jméno"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full border p-2 rounded"
+            required
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full border p-2 rounded"
+            required
+          />
           <button
             type="submit"
-            className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition"
+            className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700"
           >
             Přihlásit se
           </button>
