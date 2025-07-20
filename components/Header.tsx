@@ -51,6 +51,12 @@ export default function Header() {
           </Link>
 
           {/* Menu napravo */}
+          <Link
+            href="/pridat"
+            className="bg-white text-teal-600 font-semibold px-3 py-1 rounded hover:bg-gray-100 transition"
+          >
+            ➕ Přidat inzerát
+          </Link>
           <Link href="/jak-to-funguje" className="hover:underline">Jak to funguje</Link>
           <Link href="/poptavka" className="hover:underline">Poptávka</Link>
           <Link href="/nabidka" className="hover:underline">Nabídka</Link>
