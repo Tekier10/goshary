@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import nabidkyData from '../data/nabidky.json';
 import poptavkyData from '../data/poptavky.json';
-import { useUser } from '../utils/useUser';
+import useUser from '../utils/useUser';
 
 export default function MojeInzeraty() {
   const { user } = useUser();
