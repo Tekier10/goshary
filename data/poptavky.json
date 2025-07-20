@@ -8,7 +8,8 @@
     "kontakt": "logistika@firma.cz",
     "overeno": true,
     "hodnoceni": 4.2,
-    "autor": "jan.novak"
+    "autor": "jan.novak",
+    "autorEmail": "jan.novak@email.cz"
   },
   {
     "id": "2",
@@ -19,6 +20,7 @@
     "kontakt": "it@inovace.cz",
     "overeno": false,
     "hodnoceni": 3.9,
-    "autor": "adam.novak"
+    "autor": "adam.novak",
+    "autorEmail": "jan.novak@email.cz"
   }
 ]
