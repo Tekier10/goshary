@@ -26,7 +26,7 @@ export default function Header() {
           <Link href="/oblibene" title="Oblíbené">
             <FaHeart className="w-5 h-5 text-white" />
           </Link>
-          <Link href="/login" title="Přihlášení">
+          <Link href="/prihlaseni" title="Přihlášení">
             <FaUser className="w-5 h-5 text-white" />
           </Link>
           <button
@@ -46,7 +46,7 @@ export default function Header() {
           <Link href="/oblibene" title="Oblíbené">
             <FaHeart className="w-5 h-5 text-white" />
           </Link>
-          <Link href="/login" title="Přihlášení">
+          <Link href="/prihlaseni" title="Přihlášení">
             <FaUser className="w-5 h-5 text-white" />
           </Link>
 
