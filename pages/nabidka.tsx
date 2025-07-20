@@ -1,87 +1,41 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import nabidkyData from '../data/nabidky.json';
+// pages/nabidka.tsx 
+import { useState, useEffect } from 'react'; import Link from 'next/link'; import Head from 'next/head'; import FavouriteButton from '../components/FavouriteButton'; import nabidkyData from '../data/nabidky.json';
 
-const uniqueTypes = Array.from(new Set(nabidkyData.map((item) => item.typ)));
+export default function NabidkaPage() { const [search, setSearch] = useState(''); const [nabidky, setNabidky] = useState(nabidkyData);
 
-export default function Nabidka() {
-  const [search, setSearch] = useState('');
-  const [typFilter, setTypFilter] = useState('');
-  const [sortBy, setSortBy] = useState('');
+useEffect(() => { const filtered = nabidkyData.filter((n) => n.titulek.toLowerCase().includes(search.toLowerCase()) || n.popis.toLowerCase().includes(search.toLowerCase()) || n.lokalita.toLowerCase().includes(search.toLowerCase()) ); setNabidky(filtered); }, [search]);
 
-  const filtered = nabidkyData
-    .filter(
-      (item) =>
-        (item.typ.toLowerCase().includes(search.toLowerCase()) ||
-          item.popis.toLowerCase().includes(search.toLowerCase()) ||
-          item.lokalita.toLowerCase().includes(search.toLowerCase())) &&
-        (!typFilter || item.typ === typFilter)
-    )
-    .sort((a, b) => {
-      if (sortBy === 'lokalita') return a.lokalita.localeCompare(b.lokalita);
-      if (sortBy === 'hodnoceni') return (b.hodnoceni || 0) - (a.hodnoceni || 0);
-      if (sortBy === 'overeno') return (b.overeno === true ? 1 : 0) - (a.overeno === true ? 1 : 0);
-      return 0;
-    });
+return ( <> <Head> <title>Nabídky | GoShary</title> </Head> <main className="max-w-4xl mx-auto p-6"> <div className="flex justify-between items-center mb-4"> <h1 className="text-2xl font-bold">Nabídky</h1> <Link
+href="/pridat?typ=nabidka"
+className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
+> ➕ Přidat nabídku </Link> </div>
 
-  return (
-    <main className="max-w-4xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Nabídky</h1>
-      <Link
-        href="/pridat"
-        className="inline-block mt-2 bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition"
-      >
-        ➕ Přidat nabídku
-      </Link>
+<input
+      type="text"
+      placeholder="Hledat..."
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+      className="w-full border border-gray-300 rounded px-3 py-2 mb-6"
+    />
 
-      <div className="flex flex-col sm:flex-row gap-4">
-        <input
-          type="text"
-          placeholder="Vyhledat…"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-2 border rounded"
-        />
+    <ul className="space-y-4">
+      {nabidky.map((n) => (
+        <li key={n.id} className="border border-gray-200 rounded p-4 hover:shadow-md transition">
+          <div className="flex justify-between items-center">
+            <div>
+              <Link href={`/nabidka/${n.id}`} className="text-lg font-semibold text-teal-700 hover:underline">
+                {n.titulek}
+              </Link>
+              <p className="text-sm text-gray-500">{n.lokalita}</p>
+            </div>
+            <FavouriteButton id={n.id} />
+          </div>
+          <p className="mt-2 text-sm text-gray-700 line-clamp-2">{n.popis}</p>
+        </li>
+      ))}
+    </ul>
+  </main>
+</>
 
-        <select
-          value={typFilter}
-          onChange={(e) => setTypFilter(e.target.value)}
-          className="p-2 border rounded"
-        >
-          <option value="">Všechny typy</option>
-          {uniqueTypes.map((typ) => (
-            <option key={typ} value={typ}>
-              {typ}
-            </option>
-          ))}
-        </select>
+); }
 
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="p-2 border rounded"
-        >
-          <option value="">Řadit podle</option>
-          <option value="lokalita">Lokalita</option>
-          <option value="hodnoceni">Hodnocení</option>
-          <option value="overeno">Ověření</option>
-        </select>
-      </div>
-
-      <ul className="space-y-4">
-        {filtered.map((item) => (
-          <li
-            key={item.id}
-            className="border border-gray-200 p-4 rounded hover:bg-gray-50 transition"
-          >
-            <Link href={`/nabidka/${item.id}`} className="block">
-              <h2 className="text-lg font-semibold">{item.titulek}</h2>
-              <p className="text-sm text-gray-500">{item.lokalita}</p>
-              <p className="mt-2 text-gray-700">{item.popis.slice(0, 100)}...</p>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
-  );
-}
