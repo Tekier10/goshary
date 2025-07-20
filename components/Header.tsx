@@ -1,76 +1,105 @@
-// components/Header.tsx – navigace s responsivním chováním
-
+// components/Header.tsx
 import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
-import { FaSearch, FaHeart, FaUser } from 'react-icons/fa';
+import { FaSearch, FaHeart, FaUser, FaBell } from 'react-icons/fa';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Simulovaný počet nepřečtených notifikací
+  const unreadCount = 3;
+
+  const NotificationIcon = () => (
+    <div className="relative">
+      <FaBell className="w-5 h-5" />
+      {unreadCount > 0 && (
+        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full px-1.5 font-bold">
+          {unreadCount}
+        </span>
+      )}
+    </div>
+  );
+
   return (
-    <header className="bg-teal-500 text-white px-4 py-3 shadow-md">
-      <div className="w-full max-w-screen-2xl mx-auto flex items-center justify-between px-4">
-        {/* Logo vlevo */}
-        <div className="flex items-center space-x-4">
-          <Link href="/">
-            <span className="text-xl font-bold text-black">Go Shary</span>
-          </Link>
-        </div>
+    <header className="bg-teal-500 text-white">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <Link href="/" className="text-xl font-bold text-black">
+          Go Shary
+        </Link>
 
-        {/* Ikony + hamburger vpravo (mobil) */}
-        <div className="flex items-center space-x-4 sm:hidden">
-          <Link href="/search" title="Vyhledávání">
-            <FaSearch className="w-5 h-5 text-white" />
+        {/* Ikony – mobil */}
+        <div className="flex items-center gap-4 order-2 sm:order-none sm:hidden">
+          <Link href="/vyhledavani" title="Vyhledávání">
+            <FaSearch className="text-white w-5 h-5" />
           </Link>
           <Link href="/oblibene" title="Oblíbené">
-            <FaHeart className="w-5 h-5 text-white" />
+            <FaHeart className="text-white w-5 h-5" />
+          </Link>
+          <Link href="/notifikace" title="Notifikace">
+            <NotificationIcon />
           </Link>
           <Link href="/prihlaseni" title="Přihlášení">
-            <FaUser className="w-5 h-5 text-white" />
+            <FaUser className="text-white w-5 h-5" />
           </Link>
-          <button
-            className="text-white focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
 
-        {/* Desktop ikony + menu (v tomto pořadí) */}
-        <div className="hidden sm:flex items-center space-x-6">
-          {/* Ikony vlevo */}
-          <Link href="/search" title="Vyhledávání">
-            <FaSearch className="w-5 h-5 text-white" />
+        <button
+          className="sm:hidden text-white"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Menu"
+        >
+          {isOpen ? <X /> : <Menu />}
+        </button>
+
+        {/* Navigace – desktop */}
+        <nav className="hidden sm:flex items-center gap-6 ml-auto">
+          <Link href="/nabidka" className="hover:underline">
+            Nabídka
           </Link>
-          <Link href="/oblibene" title="Oblíbené">
-            <FaHeart className="w-5 h-5 text-white" />
+          <Link href="/poptavka" className="hover:underline">
+            Poptávka
           </Link>
-          <Link href="/prihlaseni" title="Přihlášení">
-            <FaUser className="w-5 h-5 text-white" />
+          <Link href="/jak-to-funguje" className="hover:underline">
+            Jak to funguje
+          </Link>
+          <Link href="/pridat" className="hover:underline">
+            Přidat
           </Link>
 
-          {/* Menu napravo */}
-          <Link
-            href="/pridat"
-            className="bg-white text-teal-600 font-semibold px-3 py-1 rounded hover:bg-gray-100 transition"
-          >
-            ➕ Přidat inzerát
-          </Link>
-          <Link href="/jak-to-funguje" className="hover:underline">Jak to funguje</Link>
-          <Link href="/poptavka" className="hover:underline">Poptávka</Link>
-          <Link href="/nabidka" className="hover:underline">Nabídka</Link>
-          <Link href="/kontakt" className="hover:underline">Kontakt</Link>
-        </div>
+          {/* Ikony – desktop */}
+          <div className="flex items-center gap-4 ml-4">
+            <Link href="/vyhledavani" title="Vyhledávání">
+              <FaSearch className="w-5 h-5" />
+            </Link>
+            <Link href="/oblibene" title="Oblíbené">
+              <FaHeart className="w-5 h-5" />
+            </Link>
+            <Link href="/notifikace" title="Notifikace">
+              <NotificationIcon />
+            </Link>
+            <Link href="/prihlaseni" title="Přihlášení">
+              <FaUser className="w-5 h-5" />
+            </Link>
+          </div>
+        </nav>
       </div>
 
-      {/* Rozbalené menu v mobilu */}
+      {/* Rozbalené menu – mobil */}
       {isOpen && (
-        <nav className="sm:hidden px-4 pt-2 pb-4">
-          <Link href="/jak-to-funguje" className="block py-1">Jak to funguje</Link>
-          <Link href="/poptavka" className="block py-1">Poptávka</Link>
-          <Link href="/nabidka" className="block py-1">Nabídka</Link>
-          <Link href="/kontakt" className="block py-1">Kontakt</Link>
+        <nav className="sm:hidden px-4 pb-4 space-y-2">
+          <Link href="/nabidka" className="block text-white">
+            Nabídka
+          </Link>
+          <Link href="/poptavka" className="block text-white">
+            Poptávka
+          </Link>
+          <Link href="/jak-to-funguje" className="block text-white">
+            Jak to funguje
+          </Link>
+          <Link href="/pridat" className="block text-white">
+            Přidat
+          </Link>
         </nav>
       )}
     </header>
