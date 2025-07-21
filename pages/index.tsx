@@ -7,8 +7,6 @@ import SharyLoader from '../components/SharyLoader';
 export default function HomePage() {
   return (
     <>
-      <SharyLoader />;
-      
       <Head>
         <title>GoShary – Sdílej co máš navíc</title>
         <meta name="description" content="Platforma pro sdílení firemních kapacit" />
