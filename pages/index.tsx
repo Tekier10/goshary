@@ -2,9 +2,12 @@
 
 import Head from 'next/head';
 import StorySection from '../components/StorySection';
+import SharyLoader from '../components/SharyLoader';
 
 export default function HomePage() {
-  return (
+  return
+  <SharyLoader />;
+ (
     <>
       <Head>
         <title>GoShary – Sdílej co máš navíc</title>
