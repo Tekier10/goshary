@@ -1,0 +1,53 @@
+// 🔧 Upravený schema.prisma
+// Přidán model Notifikace a vztah v modelu Uzivatel
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Uzivatel {
+  id          String        @id @default(cuid())
+  jmeno       String
+  email       String       @unique
+  inzeraty    Inzerat[]
+  oblibene    Inzerat[]     @relation("OblibeneInzeraty")
+  notifikace  Notifikace[]
+}
+
+model Inzerat {
+  id          String      @id @default(cuid())
+  typStranky  String
+  typ         String
+  titulek     String
+  popis       String
+  lokalita    String
+  kontakt     String
+  overeno     Boolean     @default(false)
+  hodnoceni   Float       @default(0)
+  autorId     String
+  autor       Uzivatel    @relation(fields: [autorId], references: [id])
+  fotky       Fotka[]
+  oblibeno    Uzivatel[]  @relation("OblibeneInzeraty")
+}
+
+model Fotka {
+  id        String   @id @default(cuid())
+  url       String
+  inzerat   Inzerat  @relation(fields: [inzeratId], references: [id])
+  inzeratId String
+}
+
+model Notifikace {
+  id         String     @id @default(cuid())
+  zprava     String
+  datum      DateTime   @default(now())
+  precteno   Boolean    @default(false)
+  uzivatel   Uzivatel   @relation(fields: [prijemceId], references: [id])
+  prijemceId String
+}
+
